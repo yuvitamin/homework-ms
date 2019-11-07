@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yuzhi.msmember.mapper.MemberMapper">
+  <resultMap id="BaseResultMap" type="com.yuzhi.msmember.domain.entity.Member">
+    <!--@mbg.generated-->
+    <!--@Table t_member-->
+    <id column="m_id" jdbcType="INTEGER" property="mId" />
+    <result column="m_level" jdbcType="INTEGER" property="mLevel" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    m_id, m_level
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from t_member
+    where m_id = #{mId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <!--@mbg.generated-->
+    delete from t_member
+    where m_id = #{mId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="m_id" keyProperty="mId" parameterType="com.yuzhi.msmember.domain.entity.Member" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into t_member (m_level)
+    values (#{mLevel,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" keyColumn="m_id" keyProperty="mId" parameterType="com.yuzhi.msmember.domain.entity.Member" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into t_member
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="mLevel != null">
+        m_level,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="mLevel != null">
+        #{mLevel,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yuzhi.msmember.domain.entity.Member">
+    <!--@mbg.generated-->
+    update t_member
+    <set>
+      <if test="mLevel != null">
+        m_level = #{mLevel,jdbcType=INTEGER},
+      </if>
+    </set>
+    where m_id = #{mId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yuzhi.msmember.domain.entity.Member">
+    <!--@mbg.generated-->
+    update t_member
+    set m_level = #{mLevel,jdbcType=INTEGER}
+    where m_id = #{mId,jdbcType=INTEGER}
+  </update>
+</mapper>

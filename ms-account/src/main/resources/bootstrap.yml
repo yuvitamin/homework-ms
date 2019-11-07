@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: ms-account-config
+  profiles:
+    active: pro
+  cloud:
+    nacos:
+      config:
+        #  配置中心的地址
+        server-addr: 39.108.64.63:8848
+        #  配置文件的后缀名
+        file-extension: yml
+        refreshable-dataids: false
+
+
+

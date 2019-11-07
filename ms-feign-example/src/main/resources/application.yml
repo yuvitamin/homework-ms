@@ -1,0 +1,36 @@
+server:
+  port: 8099
+spring:
+  application:
+    name: ms-feign
+  # ====注册中心配置信息=====
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 39.108.64.63:8848
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/member?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+    username: root
+    password: 123456
+    druid:
+      initial-size: 5
+      max-active: 20
+      min-idle: 3
+      filters: stat,wall,slf4j
+      web-stat-filter:
+        enabled: true
+        log-slow-sql: true
+        url-pattern: /*
+        exclusions: "*.js,*.gif,*.jpg,*.png,*.css,*.ico, /druid/*"
+      stat-view-servlet:
+        enabled: true
+        url-pattern: /druid/*
+        reset-enable: false
+        login-username: admin
+        login-password: admin
+        allow: 127.0.0.1
+        deny: ""
+  mybatis:
+    mapper-locations: classpath:mappers/**/*.xml

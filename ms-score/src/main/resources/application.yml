@@ -1,0 +1,53 @@
+server:
+  port: 8092
+
+spring:
+  application:
+    name: ms-score
+  # ====注册中心配置信息=====
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 39.108.64.63:8848
+
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/member?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+    username: root
+    password: 532612
+    # druid 配置
+    druid:
+      initial-size: 5
+      max-active: 20
+      min-idle: 3
+      #      配置监控统计拦截器 日志配置  Slf4j  logback
+      #      stat监控数据库性能
+      #      wall  用于防火墙
+      #      日志先关 slf4j logback  log4j  log4j2
+      filters: stat,wall,slf4j
+      web-stat-filter:
+        enabled: true
+        log-slow-sql: true
+        # 拦截哪些请求
+        url-pattern: /*
+        # 排除不拦截的 请求
+        exclusions: "*.js,*.gif,*.jpg,*.png,*.css,*.ico, /druid/*"
+      # 配置后台监控
+      stat-view-servlet:
+        # 开户性能监控
+        enabled: true
+        url-pattern: /druid/*
+        # 界面上有一个重置功能 执行这个操作之后，会导致所有计数器清零，重新计数 建议false
+        reset-enable: false
+        # 登录管理的账号密码
+        login-username: admin
+        login-password: admin
+        #  允许访问的id
+        allow: 127.0.0.1
+        #  和名单
+        deny: ""
+#  mybatis整合
+mybatis:
+  mapper-locations: classpath:mappers/**/*.xml
+
